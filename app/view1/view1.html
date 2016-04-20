@@ -1,0 +1,113 @@
+<div class="container">
+    <h3 class="text-center">To-Do List</h3>
+    <hr>
+</div>
+
+<div class="container">
+    <!-- SORT FORM-->
+    <form class="form-inline" id="frmSort">
+        <div class="form-group">
+            <label for="cboSort">Sort by:</label>
+            
+            <select selected="" class="form-control" id="cboSort" ng-model="sortOption">
+                <option value="">Default</option>
+                <option value="date">Date</option>
+                <option value="type">Type</option>
+            </select>
+            
+            <button class="btn btn-default" id="btnSortOrder" ng-click="sortOrder()">{{sortName}}</button>
+        </div>
+    </form>
+
+    <!-- FILTER FORM -->
+    <form class="form-inline" id="frmFilter">
+        <div class="form-group">
+            <label for="txtFilter">Filter by:</label>
+            
+            <select class="form-control" id="cboFilter" ng-init="filterBy = ''" ng-model="filterBy" ng-change="selectFilter()">
+                <option value="">All</option>
+                <option value="isDone">State</option>
+            </select>
+            
+            <input type="text" class="form-control" id="txtFilter" ng-show="filterBy === ''" ng-model="filterText"/>
+            
+            <label for="chkIsDone" ng-hide="filterBy === ''">
+            <input type="checkbox" id="chkIsDone" ng-model="filterText" ng-hide="filterBy === ''"/>  Is done</label>
+        </div>
+    </form>
+    
+    <!-- ACTIVITIES item-switch item="item" item-index="$index" -->
+    <div class="row" id="activitiesContainer">
+        <div class="col-xs-12">
+			<div ng-repeat="item in tempList = (items | orderBy:sortOption:reverse | filter:filterText)" 
+                 ng-click="calcPercentageCompleted(item.type)" 
+                 ng-dblclick="onDblClick(item)" 
+                 item-switch item="item" item-index="$index" 
+                 class="notice notice-{{classMap[item.type]}} {{item.inEdition? 'edit':''}}">
+			</div>
+            
+            <div class="text-center" ng-hide="tempList.length">No hay resultados</div>
+		</div>
+	</div>
+    
+    <p ng-show="tempList.length">Percent {{itemTypeCompleted}} completed {{typeCompleted}}%</p>
+    
+    <hr>
+    
+    <!-- BUTTONS MENU -->
+    <div class="row text-center">
+        <button class="btn {{view == 0? 'btn-primary':'btn-default'}}" ng-click="view = 0; showError = false;">Items</button>
+        <button class="btn {{view == 1? 'btn-primary':'btn-default'}}" ng-click="view = 1; showError = false;">Categories</button>
+    </div>
+    
+    <div class="alert alert-danger text-center" ng-show="showError">
+        <strong>Error!</strong> {{errorMsj}}
+    </div>
+    
+    <!-- ACTIVITY FORM -->
+    <div ng-show="view == 0">
+        <h4>Items gestion</h4>
+    
+        <form id="frmCreateItem" ng-init="item={}">
+            <div class="form-group" id="divType">
+                <label for="cboType">Type:</label>
+                <select selected="" class="form-control" id="cboType" ng-model="item.type" ng-options="item as item for item in itemType">
+                    <option value="">Select a type</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="divDate">
+                <label for="txtDate">Final date:</label>
+                <input class="form-control" type="date" id="txtDate" ng-model="item.finalDate"/>
+            </div>
+
+            <div class="form-group">
+                <label for="txtValue">Description:</label>
+                <input class="form-control" type="text" id="txtValue" ng-model="item.description" maxlength="40"/>
+            </div>
+
+            <button class="btn btn-default" ng-show="inEdition" ng-click="removeSelection()" title="Add new item">+</button>
+            <button class="btn btn-default" ng-show="!inEdition" ng-click="addItem(item);item={}">Add</button>
+            <button class="btn btn-default" ng-show="inEdition" ng-click="updateItem(item);item={}">Update</button>
+            <button class="btn btn-default" ng-show="inEdition" ng-click="removeItem()">Remove</button>
+        </form>
+    </div>
+    
+    <!-- CATEGORIES FORM -->
+    <div ng-show="view == 1">
+        <h4>Categories gestion</h4>
+    
+        <form class="form-inline" id="frmCategory">
+            <div class="form-group">
+                <label for="txtCategory">Name:</label>
+                <input class="form-control" type="text" id="txtCategory" ng-model="category" maxlength="20">
+            </div>
+
+            <button class="btn btn-default" id="btnAddCategory" ng-click="addCategory(category);category=''">Add</button>
+        </form>
+    </div>
+    
+    <br>
+    <!-- VIEW ABOUT -->
+    <a href="../#/view-about">About<a/>
+</div>
