@@ -1,5 +1,5 @@
 <strong class="col-xs-2">{{item.type}}</strong> <span>{{item.description}}</span>
-<i class="text-success col-xs-2">{{item.date | date:dd/MM/YYYY}}</i>
+<i class="text-success col-xs-2">{{item.date | date:'EEE dd MMM yyyy'}}</i>
 <i item-final-date item="item"></i>
 <div class="material-switch pull-right">
 	<input ng-model="item.isDone" 

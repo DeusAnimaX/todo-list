@@ -59,6 +59,7 @@ angular.module('myApp.view1', ['ngRoute'])
         
         item.inEdition = true;
         $scope.inEdition = true;
+        $scope.view = 0;
     };
     
     $scope.calcPercentageCompleted = function(type){
@@ -75,7 +76,7 @@ angular.module('myApp.view1', ['ngRoute'])
         });
         
         $scope.itemTypeCompleted = type;
-        $scope.typeCompleted = completedItems/totalItemsType*100;
+        $scope.typeCompleted = Math.round(completedItems/totalItemsType*100);
     };
     
     $scope.calcPercentageCompleted($scope.itemType[0]);

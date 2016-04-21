@@ -24,11 +24,11 @@ angular.module('myApp.items.service', [])
     }
     
     var items = [ // date: MM/dd/YYYY
-        {type:itemType[0], description:"Buy Milk",                   isDone:true,  date:new Date("06/13/2015"), finalDate:new Date("8/13/2015")},
-        {type:itemType[1], description:"Wash Car",                   isDone:false, date:new Date("12/10/2013"), finalDate:new Date("12/13/2013")},
-        {type:itemType[2], description:"Proy 3 To Do List Homework", isDone:false, date:new Date("12/24/2015"), finalDate:new Date("12/31/2015")},
-        {type:itemType[3], description:"Pay Cenfotec",               isDone:false, date:new Date("01/05/2016"), finalDate:new Date("10/05/2016")},
-        {type:itemType[3], description:"Pay PSN Plus",               isDone:false, date:new Date("02/14/2014"), finalDate:new Date("02/15/2014")}
+        {type:itemType[0], description:"Buy Milk",                   isDone:true,  date:new Date("02/13/2016"), finalDate:new Date("02/14/2016")},
+        {type:itemType[1], description:"Wash Car",                   isDone:false, date:new Date("03/10/2016"), finalDate:new Date("03/13/2016")},
+        {type:itemType[2], description:"Proy 3 To Do List Homework", isDone:false, date:new Date("02/24/2016"), finalDate:new Date("02/26/2016")},
+        {type:itemType[3], description:"Pay Cenfotec",               isDone:true,  date:new Date("01/05/2016"), finalDate:new Date("01/06/2016")},
+        {type:itemType[3], description:"Pay PSN Plus",               isDone:false, date:new Date("04/14/2016"), finalDate:new Date("04/15/2016")}
     ];
 
     this.getItems = function(){
